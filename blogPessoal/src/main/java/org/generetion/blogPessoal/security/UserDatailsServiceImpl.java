@@ -15,15 +15,13 @@ public class UserDatailsServiceImpl implements UserDetailsService {
 	
 	@Autowired
 	private UsuarioRepository userRepository;
-	
-
 
 	@Override
 	public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
-		
+
 		Optional<Usuario> user = userRepository.findByUsuario(userName);
-		user.orElseThrow(() -> new UsernameNotFoundException(userName + "not found."));
-		
-		return user.map(UserDetailsImpl :: new).get();
+		user.orElseThrow(() -> new UsernameNotFoundException(userName + " not found."));
+
+		return user.map(UserDetailsImpl::new).get();
 	}
 }
